@@ -24,13 +24,15 @@ def send_message(text):
 def get_us_universe():
     import pandas as pd
 
-    url = "https://raw.githubusercontent.com/oddball/datasets/main/nasdaq-100/nasdaq-100.csv"
-    df = pd.read_csv(url)
+    url = "https://en.wikipedia.org/wiki/Nasdaq-100"
+    tables = pd.read_html(url)
 
-    return df["Symbol"].tolist()
+    for t in tables:
+        if "Ticker" in t.columns:
+            df = t
+            break
 
-def fix_symbol(symbol):
-    return symbol.replace(".", "-")
+    return [symbol.replace(".", "-") for symbol in df["Ticker"].tolist()]
 
 
 
