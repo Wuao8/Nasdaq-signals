@@ -215,14 +215,16 @@ def run_scan():
             if df is None:
                 continue
 
-            if check_signal(df):
+            signal = check_signal(df)
+
+            if signal:
 
                 price = float(df.iloc[-1]["Close"])
 
                 clean_symbol = symbol.replace("=X", "")
 
                 signals.append(
-                    f"{clean_symbol} @ {round(price, 5)}"
+                    f"{signal} | {clean_symbol} @ {round(price, 5)}"
                 )
 
         except:
@@ -244,7 +246,8 @@ if __name__ == "__main__":
     if results:
 
         msg = (
-            "💱 FOREX SIGNALS\n\n"
+            "💱 FOREX DAILY SIGNALS\n"
+            "EMA20 + MACD\n\n"
             + "\n".join(results[:20])
         )
 
