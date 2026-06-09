@@ -172,19 +172,17 @@ def check_signal(df):
         and last["Close"] > last["ema20"]
     )
 
-    long_macd = (
-        prev["macd"] < prev["signal"]
-        and last["macd"] > last["signal"]
-    )
-
     short_ema = (
         prev["Close"] > prev["ema20"]
         and last["Close"] < last["ema20"]
     )
 
+    long_macd = (
+        last["macd"] > last["signal"]
+    )
+
     short_macd = (
-        prev["macd"] > prev["signal"]
-        and last["macd"] < last["signal"]
+        last["macd"] < last["signal"]
     )
 
     if long_ema and long_macd:
