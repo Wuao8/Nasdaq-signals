@@ -7,23 +7,32 @@ async function loadSignals() {
     const data = await res.json();
 
     const feed = document.getElementById("feed");
+
+    if (!Array.isArray(data)) return;
+
     feed.innerHTML = "";
 
-    data.reverse().forEach(sig => {
+    data.slice().reverse().forEach(sig => {
       const div = document.createElement("div");
-      div.className = "line " + (sig.side === "LONG" ? "long" : "short");
+
+      const cls = sig.side === "LONG" ? "long" : "short";
+
+      div.className = "line " + cls;
 
       div.innerHTML = `
-        [${sig.time}] ${sig.side} → ${sig.symbol} | MACD: ${sig.value}
+        <span>[${sig.time}]</span>
+        <b>${sig.side}</b>
+        <span>${sig.symbol}</span>
+        <span>MACD: ${sig.value.toFixed(6)}</span>
       `;
 
       feed.appendChild(div);
     });
 
   } catch (e) {
-    console.log("error loading signals", e);
+    console.log("feed error", e);
   }
 }
 
 loadSignals();
-setInterval(loadSignals, 10000);
+setInterval(loadSignals, 8000);
