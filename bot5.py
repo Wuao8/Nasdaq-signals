@@ -173,6 +173,17 @@ def main():
 
         changed = True
 
+        signals = load_signals()
+
+        signals.append({
+            "time": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "symbol": symbol,
+            "side": side,
+            "value": float(value)
+        })
+
+save_signals(signals)
+
         emoji = "🟢" if side == "LONG" else "🔴"
 
         message = (
@@ -190,6 +201,21 @@ def main():
         time.sleep(1)
 
 # ---------------- MAIN ENTRY ---------------- #
+
+SIGNALS_FILE = "signals.json"
+
+
+def load_signals():
+    if os.path.exists(SIGNALS_FILE):
+        with open(SIGNALS_FILE, "r") as f:
+            return json.load(f)
+    return []
+
+
+def save_signals(signals):
+    with open(SIGNALS_FILE, "w") as f:
+        json.dump(signals[-200:], f, indent=2)
+        
 
 if __name__ == "__main__":
 
