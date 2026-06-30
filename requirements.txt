@@ -1,5 +1,2 @@
 requests
 pandas
-yfinance
-lxml
-html5lib
