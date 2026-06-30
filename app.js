@@ -1,5 +1,5 @@
 const URL =
-  "https://github.com/Wuao8/Olimpia-Crypto/blob/main/signals.json";
+  "https://raw.githubusercontent.com/Wuao8/Olimpia-Crypto/main/signals.json";
 
 async function loadSignals() {
   try {
