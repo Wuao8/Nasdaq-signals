@@ -57,9 +57,16 @@ body{
 
     padding-bottom:10px;
 
-    font-size:15px;
+    font-size:17px;
 
     flex-wrap:wrap;
+}
+
+.title,
+#status {
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 1px;
 }
 
 /* DESCRIPTION */
